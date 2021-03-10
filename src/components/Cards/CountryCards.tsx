@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { Context } from '../../Context/GlobalContext'
 
@@ -11,31 +12,25 @@ const Wrapper = styled.div`
     max-width: 1120px;
     margin: 0;
     padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 10%;
-    align-items: center;
-
+    
     @media (min-width: 512px) {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 5%;
-        margin: 0;
+        gap: 1.5rem;
+        row-gap: 1.5rem;
     }
 
     @media (min-width: 900px) {
-        display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 5%;
     }
 `
 
 const Card = styled.section`
-    width: 90%;
+    width: 100%;
     border-radius: 8px;
     box-shadow: -1px 2px 4px -1px #000000;
     padding-bottom: 1rem;
-    margin: 2rem 0;
+    margin: 1rem 0;
 
     img {
         width: 100%;
@@ -48,7 +43,7 @@ const Card = styled.section`
     }
 `
 
-interface CountryType {
+export interface CountryType {
     alpha2Code: string;
     alpha3Code: string;
     altSpellings: string[]
@@ -86,19 +81,28 @@ interface CountryType {
     }
 }
 
+type Border = { border: string}
+
 export const CountryCards: React.FC = () => {
-    const { countries } = useContext(Context)
+    const { border }: Border = useParams()
+    const { countries, searchValue } = useContext(Context)
     
-    const mapCountries= countries.map((item: CountryType) =>{
+    const filterCountry = 
+        countries.filter((item: CountryType) => item.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) 
+        || countries.filter((item: CountryType, index) => item.borders[index] === border) 
+
+    const mapCountries = filterCountry.map((item: CountryType, index) =>{
         return (
             <Card key={item.name}>
-                <img src={item.flag}/>
-                <div>
-                    <h2>{item.name}</h2>
-                    <p><b>Population</b>: {item.population}</p>
-                    <p><b>Region</b>: {item.region}</p>
-                    <p><b>Capital</b>: {item.capital}</p>
-                </div>
+                <Link to={`/${item.name}`}>
+                    <img src={item.flag}/>
+                    <div>
+                        <h2>{item.name}</h2>
+                        <p><b>Population</b>: {item.population}</p>
+                        <p><b>Region</b>: {item.region}</p>
+                        <p><b>Capital</b>: {item.capital}</p>
+                    </div>
+                </Link>
             </Card>)
     })
     

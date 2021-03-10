@@ -3,19 +3,26 @@ import React, { createContext, useEffect, useReducer, useState } from 'react'
 type ValueType = {
     countries: [];
     isModeDark: boolean;
+    searchValue: string;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const initialValue: ValueType = {
     countries: [],
     isModeDark: false,
+    searchValue: '',
+    handleChange: () => {},
+    handleSelectChange: () => {}
 }
 
 type State = {
     countries: any;
+    searchValue: string;
     isModeDark: boolean;
 }
 
-interface CountryType {
+type CountryType = {
     conutry: {
         alpha2Code: string;
         alpha3Code: string;
@@ -55,15 +62,21 @@ interface CountryType {
     }
 }
 
-type Action = 
+export type Action = 
 | { type: 'FETCH_API', payload: CountryType[] } 
 | { type: 'CHANGE_MODE' }
+| { type: 'SEARCH_COUNTRY', payload: string}
+| { type: 'SELECT_COUNTRY', payload: string}
 
 
 const reducer = (state: State = initialValue, action: Action) => {
     switch (action.type) {
         case 'FETCH_API':
-            return {...state, countries: [...action.payload]}
+            return {...state, countries: action.payload}
+        case 'SEARCH_COUNTRY':
+            return {...state, searchValue: action.payload}
+        case 'SELECT_COUNTRY':
+            return {...state, searchValue: action.payload}
         default:
             return state
     }
@@ -86,7 +99,13 @@ export const ContextProvider: React.FC = ({children}) => {
     }, [])
 
     return (
-        <Context.Provider value={{countries: state.countries, isModeDark: false}}>
+        <Context.Provider value={{
+            countries: state.countries, 
+            searchValue: state.searchValue,
+            isModeDark: false, 
+            handleChange: (e) => dispacth({ type: 'SEARCH_COUNTRY', payload: e.target.value}),
+            handleSelectChange: (e) => dispacth({ type: 'SELECT_COUNTRY', payload: e.target.value})
+        }}>
             {children}
         </Context.Provider>
     ) 
