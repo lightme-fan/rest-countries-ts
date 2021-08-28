@@ -12,14 +12,13 @@ import {
   lightTheme,
   MainContainer,
   WrapperContainer,
-} from './styles'
+} from './globalStyles'
 import { ThemeProvider } from 'styled-components'
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState('light')
   const toggleTheme = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light')
-    console.log('Cliciked')
   }
 
   return (

@@ -4,6 +4,7 @@ type ValueType = {
   countries: []
   isModeDark: boolean
   searchValue: string
+  selectValue: string
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
@@ -12,6 +13,7 @@ const initialValue: ValueType = {
   countries: [],
   isModeDark: false,
   searchValue: '',
+  selectValue: '',
   handleChange: () => {},
   handleSelectChange: () => {},
 }
@@ -19,6 +21,7 @@ const initialValue: ValueType = {
 type State = {
   countries: any
   searchValue: string
+  selectValue: string
   isModeDark: boolean
 }
 
@@ -81,7 +84,7 @@ const reducer = (state: State = initialValue, action: Action) => {
     case 'SEARCH_COUNTRY':
       return { ...state, searchValue: action.payload }
     case 'SELECT_COUNTRY':
-      return { ...state, searchValue: action.payload }
+      return { ...state, selectValue: action.payload }
     case 'SET_THEME_MODE':
       return { ...state, isModeDark: !state.isModeDark }
     default:
@@ -104,13 +107,12 @@ export const ContextProvider: React.FC = ({ children }) => {
     fetchApi('https://restcountries.eu/rest/v2/all')
   }, [])
 
-  //   https://restcountries.eu/rest/v2/region/{region}
   const handleSelectChange = async (e: any) => {
-    const region = e.target.value
-    const data = await fetchApi(
-      `https://restcountries.eu/rest/v2/region/${region}`
+    dispacth({ type: 'SELECT_COUNTRY', payload: e.target.value })
+    const filterCountries = state?.countries.filter((country: any) =>
+      country.region.toLowerCase().includes(state.selectValue.toLowerCase())
     )
-    console.log(data)
+    dispacth({ type: 'FETCH_API', payload: filterCountries })
   }
 
   return (
@@ -118,6 +120,7 @@ export const ContextProvider: React.FC = ({ children }) => {
       value={{
         countries: state.countries,
         searchValue: state.searchValue,
+        selectValue: state.selectValue,
         isModeDark: false,
         handleChange: (e) =>
           dispacth({ type: 'SEARCH_COUNTRY', payload: e.target.value }),
