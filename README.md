@@ -2,6 +2,11 @@
 
 ![Design preview for the REST Countries API with color theme switcher coding challenge](./design/desktop-preview.jpg)
 
+## Build with
+
+- React Typescript
+- Styled-component
+
 ## Features
 
 - List of countries
