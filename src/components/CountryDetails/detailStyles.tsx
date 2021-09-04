@@ -20,19 +20,19 @@ export const DescriptionWrapper = styled.div`
 `
 
 export const Back = styled.div`
-  max-width: 30px;
-  cursor: pointer;
-  padding: 10px 28px 10px 60px;
-  border: none;
-  box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.75);
-  border-radius: 7px;
-  background-color: ${({ theme }: any) => theme.active};
-  background-image: url(${({ theme }: any) => theme.leftArrow});
-  background-repeat: no-repeat;
-  background-size: 20px;
-  background-position: 22% 50%;
-
   a {
+    max-width: 30px;
+    cursor: pointer;
+    padding: 10px 28px 10px 60px;
+    border: none;
+    box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 7px;
+    background-color: ${({ theme }: any) => theme.active};
+    background-image: url(${({ theme }: any) => theme.leftArrow});
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: 22% 50%;
+
     color: ${({ theme }: any) => theme.text};
   }
 `
