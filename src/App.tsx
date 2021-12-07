@@ -27,7 +27,7 @@ const App: React.FC = () => {
       <Router>
         <ContextProvider>
           <MainContainer>
-            <Header onClick={toggleTheme} />
+            <Header onClick={toggleTheme} mode={theme === 'light' ? 'Dark' : 'Light'} />
             <WrapperContainer>
               <Switch>
                 <Route path='/' exact>

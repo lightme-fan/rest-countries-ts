@@ -3,25 +3,21 @@ import { Link, useParams } from 'react-router-dom'
 import { Context } from '../../Context/GlobalContext'
 import { Card, Main, Wrapper } from './cardStyles'
 export interface CountryType {
-  name: string
-  alpha2Code: string
-  alpha3Code: string
+  name: { common: string, nativeName: any, official: string, population: number }
+  cca2: string
+  cca3: string
+  ccn3: string
+  cioc: string
   altSpellings: string[]
   area: number
-  borders: [string, string, string, string, string, string]
+  borders: string[]
   callingCodes: [string]
-  capital: string
-  cioc: string
-  currencies: { code: string; name: string; symbol: string }[]
+  capital: [string]
+  currencies: any
   demonym: string
-  flag: string
+  flags: {png: string, svg: string }
   gini: number
-  languages: {
-    iso639_1: string
-    iso639_2: string
-    name: string
-    nativeName: string
-  }[]
+  languages: { eng: string, swa: string }
   latlng: [number, number]
   nativeName: string
   numericCode: string
@@ -30,7 +26,7 @@ export interface CountryType {
   regionalBlocs: { acronym: string; name: string }[]
   subregion: string
   timezones: [string]
-  topLevelDomain: [string]
+  tld: [string]
   translations: {
     br: string
     de: string
@@ -50,24 +46,26 @@ type Border = { border: string }
 export const CountryCards: React.FC = () => {
   const { border }: Border = useParams()
   const { countries, searchValue } = useContext(Context)
+  
 
   const filterCountry =
     countries.filter((item: CountryType) =>
-      item.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+      item.name.common.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
     ) ||
     countries.filter(
       (item: CountryType, index) => item.borders[index] === border
     )
 
   const mapCountries = filterCountry.map((item: CountryType, index) => {
+    
     return (
-      <Card key={item.name}>
-        <Link to={`/${item.name}`}>
-          <img src={item.flag} alt={item.name} />
+      <Card key={item.name.common}>
+        <Link to={`/${item.name.common}`}>
+          <img src={item.flags.png} alt={item.name.common} />
           <div>
-            <h2>{item.name}</h2>
+            <h2>{item.name.common}</h2>
             <p>
-              <b>Population</b>: {item.population}
+              <b>Population</b>: {item.name.population}
             </p>
             <p>
               <b>Region</b>: {item.region}

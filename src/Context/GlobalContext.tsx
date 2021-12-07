@@ -104,7 +104,7 @@ export const ContextProvider: React.FC = ({ children }) => {
   }
 
   useEffect(() => {
-    fetchApi('https://restcountries.eu/rest/v2/all')
+    fetchApi('https://restcountries.com/v3.1/all')
   }, [])
 
   const handleSelectChange = async (e: any) => {

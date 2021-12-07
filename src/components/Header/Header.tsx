@@ -5,9 +5,10 @@ import { Container, Mode, Wrapper } from './headerStyles'
 
 interface HeaderType {
   onClick: () => void
+  mode: string
 }
 
-export const Header: React.FC<HeaderType> = ({ onClick }) => {
+export const Header: React.FC<HeaderType> = ({ onClick, mode }) => {
   return (
     <Container>
       <WrapperContainer>
@@ -16,7 +17,7 @@ export const Header: React.FC<HeaderType> = ({ onClick }) => {
             <Link to='/'>Where in the world?</Link>
           </h1>
           <Mode onClick={onClick}>
-            <span>Dark Mode</span>
+            <span>{mode} Mode</span>
           </Mode>
         </Wrapper>
       </WrapperContainer>
