@@ -1,18 +1,23 @@
-# REST Countries API with color theme switcher
+# REST Countries
+- Demo: [https://rest-countries-fanilo.netlify.app/](https://rest-countries-fanilo.netlify.app/)
+- Github: [https://github.com/lightme-fan/rest-countries-ts/](https://github.com/lightme-fan/rest-countries-ts/)
 
-![Design preview for the REST Countries API with color theme switcher coding challenge](./design/desktop-preview.jpg)
+![dark-mode-rest-countries](https://user-images.githubusercontent.com/60210180/145042183-7d812047-a21d-4cf3-b1a8-e759852e9e6e.png)
+![light-mode-rest-countries](https://user-images.githubusercontent.com/60210180/145042212-1b60731a-b790-4cf4-a325-2b7d5e7dc35d.png)
 
 ## Build with
 
-- React Typescript
+- React 
+- Typescript
+- Context API
 - Styled-component
 
 ## Features
 
 - List of countries
-- Search a country with an input field or select dropdown.
-- Country details
-- Mode button
+- Search for a country with an input field or select dropdown as filters.
+- Switch between dark and light mode
+- See a country details by clicking on a country card
 
 ## Getting started
 
