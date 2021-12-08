@@ -15,7 +15,7 @@
 ## Features
 
 - A home page where a list of countries is displayed
-- Search for a specific country with an input field or select dropdown as filters.
+- Search for a specific country by name or region.
 - Switch between dark and light mode
 - See the country details by clicking on a country card
 
