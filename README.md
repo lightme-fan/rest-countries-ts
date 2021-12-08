@@ -14,10 +14,10 @@
 
 ## Features
 
-- List of countries
-- Search for a country with an input field or select dropdown as filters.
+- A home page where a list of countries is displayed
+- Search for a specific country with an input field or select dropdown as filters.
 - Switch between dark and light mode
-- See a country details by clicking on a country card
+- See the country details by clicking on a country card
 
 ## Getting started
 
